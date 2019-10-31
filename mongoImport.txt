@@ -1,0 +1,8 @@
+
+1. go to mongoDb Bin folder
+2. Open Cmd there
+3. Run following command
+
+
+
+mongoimport --jsonArray --db test --collection SessionRecords --file fileAddressHEre.........
