@@ -1,0 +1,29 @@
+.btn-data:hover{
+        cursor: pointer;
+        background-color: blanchedalmond;
+    }
+    .btn-data:nth-child(odd):hover{
+        background-color: blanchedalmond;
+
+}
+.btn-data:nth-child(odd){
+    background-color: cornsilk;
+}
+.stick{
+    position: sticky;
+    background-color: black;
+    top:0;
+}
+div.btn:hover{
+    cursor: pointer;
+}
+
+.matches{
+    background-color: blue;
+    z-index:2;
+    float:left;
+    width:100%;
+    height:100%;
+    border:1px solid red;
+}
+  

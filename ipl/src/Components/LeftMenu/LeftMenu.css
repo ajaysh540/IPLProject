@@ -1,0 +1,7 @@
+.stick{
+    position: sticky;
+    top:0;
+}
+select.btn-dark:hover{
+   cursor: pointer;
+}
