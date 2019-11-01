@@ -1,6 +1,8 @@
-
-.matches{
-    background-color: blue;
-    z-index:1
+.team:hover {
+  transform: scale(2);
 }
+
+.data-match:hover {
   
+  cursor: pointer;
+}

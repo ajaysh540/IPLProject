@@ -14,18 +14,20 @@ class LeftMenu extends Component {
         this.handleChange=this.handleChange.bind();
     }
 handleChange=(e)=>{
-    this.state.handleSeason(e.target.value);
+    const v=e.target.value; 
+    this.setState({default: v})
+    this.state.handleSeason(v);
 }
 componentDidMount(){
 }
     render() {
-        return <div className="w-100 sticky-top h-25 h4 col-3 btn bg-dark text-white text-center m-2 stick">
+        return <div className="w-100 sticky-top h-25 h4 col-xs-12 col-sm-3 btn bg-dark text-white text-center m-2 stick">
             Filter By Season
         <hr className="bg-light" />
             <select className="w-50 h5 justify-content-between bg-white text-dark btn-dark b rounded"
                 name="seasons" defaultValue={this.state.default} onChange={this.handleChange}>
                 {this.state.seasons.map(season =>
-                    <option name="season" key={season._id} value={season._id}>{season.season}</option>)
+                    <option name="season" key={season._id} value={season._id}>{season.season} {season._id}</option>)
                 }
             </select>
         </div>
