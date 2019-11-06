@@ -14,6 +14,7 @@ class LeftMenu extends Component {
         this.handleChange=this.handleChange.bind();
     }
 handleChange=(e)=>{
+    // console.log(e.target.value)
     const v=e.target.value; 
     this.setState({default: v})
     this.state.handleSeason(v);
@@ -27,7 +28,7 @@ componentDidMount(){
             <select className="w-50 h5 justify-content-between bg-white text-dark btn-dark b rounded"
                 name="seasons" defaultValue={this.state.default} onChange={this.handleChange}>
                 {this.state.seasons.map(season =>
-                    <option name="season" key={season._id} value={season._id}>{season.season} {season._id}</option>)
+                    <option name="season" key={season} value={season}>{season}</option>)
                 }
             </select>
         </div>

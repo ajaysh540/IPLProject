@@ -5,12 +5,11 @@ import Header from '../Header/Header'
 function Home() {
 
    
-    // const user = JSON.parse(sessionStorage.getItem("User"));
     if (sessionStorage.getItem("loggedIn")) {
         return (
-            <div>
+            <div className="container-fluid">
                 <Header />
-                    <Main/>
+                <Main />
             </div>
 
         );

@@ -26,4 +26,18 @@ div.btn:hover{
     height:100%;
     border:1px solid red;
 }
-  
+.rt-tr-group .rt-tr.-odd .rt-td{
+    background-color: aqua; 
+}
+.rt-tr-group .rt-tr.-even .rt-td{
+    background-color:white;
+}
+.rt-tr-group .rt-tr.-odd .rt-td:hover{
+   cursor:pointer;
+}
+.rt-tr-group .rt-tr.-even .rt-td:hover{
+    cursor: pointer;
+}
+.rt-tr {
+color:black;
+}
