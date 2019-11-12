@@ -1,0 +1,71 @@
+[{
+	"_id": {
+		"$oid": "5dca54f7040d626d56a13849"
+	},
+	"user": {
+		"password": "root",
+		"type": "user",
+		"username": "ajay"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca5510040d626d56a1384a"
+	},
+	"user": {
+		"password": "root",
+		"type": "user",
+		"username": "user1"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca564a040d626d56a1384f"
+	},
+	"user": {
+		"password": "root",
+		"type": "user",
+		"username": "user2"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca57611330a5f2b1b1d21f"
+	},
+	"user": {
+		"username": "admin",
+		"password": "admin",
+		"type": "admin"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca7d3e040d626d56a13930"
+	},
+	"user": {
+		"password": "ajay",
+		"type": "user",
+		"username": "ajay"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca7d7d040d626d56a13931"
+	},
+	"user": {
+		"password": "root",
+		"type": "user",
+		"username": "user3"
+	}
+},
+{
+	"_id": {
+		"$oid": "5dca8049040d626d56a1393a"
+	},
+	"user": {
+		"password": "admin",
+		"type": "user",
+		"username": "User1"
+	}
+}]
+
