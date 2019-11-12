@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+import Axios from 'axios';
 
 
 class Login extends Component {
@@ -16,11 +18,6 @@ class Login extends Component {
             invalid: false,
         }
     }
-    user = {
-        name: 'Admin',
-        type: 'Admin',
-        fav: 'CSK'
-    }
     handleUsername = (e) => {
         this.setState({ username: e.target.value });
     }
@@ -32,13 +29,27 @@ class Login extends Component {
         this.checkLogin(this.state.username, this.state.password);
     }
     checkLogin(username, password) {
-        if (username === "admin" && password === "admin") {
-            sessionStorage.setItem("loggedIn", true);
-            sessionStorage.setItem("User", JSON.stringify(this.user));
-            console.log(username, password);
-            this.setState({ loggedIn: true })
+        if (username === "" || password === "") {
+            this.setState({ invalid: true })
         }
-        else { this.setState({ invalid: true }) }
+        else {
+            Axios.post('/signin', {
+                username: this.state.username,
+                password: this.state.password
+            }
+
+            ).then(res => {
+                const user = res.data;
+                sessionStorage.setItem("loggedIn", true);
+                // console.log(user)
+                sessionStorage.setItem("uname", user.username);
+                sessionStorage.setItem("utype", user.type);
+                this.setState({ loggedIn: true })
+            }, err => {
+                // console.log(err)
+                this.setState({ invalid: true });
+            });
+        }
     }
     invalidEntry() {
         if (this.state.invalid)
@@ -50,12 +61,16 @@ class Login extends Component {
         if (!this.state.loggedIn)
             return (
                 <div className="row text-center">
-                    <header className="bg-secondary text-white col-12"><h1>Welcome</h1></header>
+                    <div className="bg-secondary navbar text-white col-10 offset-1">
+                        <div className="text-left navbar-brand h1">Primier League</div>
+                    </div>
+
                     <div className="col-8 mt-5 offset-2 border border-dark">
                         <div className="container bg-light text-secondary h3" >Please Login Here</div>
                         <div className="container mt-2">
                             <form onSubmit={this.handleSubmit}>
                                 <TextField
+                                    required
                                     id="username"
                                     label="Username"
                                     className="w-50 m-3"
@@ -65,6 +80,7 @@ class Login extends Component {
                                     variant="filled"
                                 />
                                 <TextField
+                                    required
                                     id="password"
                                     label="Password"
                                     className="w-50 m-3"
@@ -85,6 +101,19 @@ class Login extends Component {
                                     <h4>Login</h4>
                                 </Button>
                             </form>
+                            <br />
+                            <h4>New here? Join Us!!</h4>
+                            <NavLink className="btn" to="/signup">
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    className="m-2"
+                                    type="submit"
+                                >
+                                    <h4>Sign Up
+                                        </h4>
+                                </Button>
+                            </NavLink>
                         </div>
                     </div>
                 </div>
