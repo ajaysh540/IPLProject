@@ -1,6 +1,6 @@
-# IPLProject\
+# IPLProject
 
-BackIp is backend for The project.
+BackIpl is backend for The project.
   Import the project as a simple java project into spring tool suite or eclipse
   
 IPl folder contains frontend create a new react project and replace the files with the ones in this folder
