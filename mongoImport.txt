@@ -1,8 +1,10 @@
 
 1. go to mongoDb Bin folder
 2. Open Cmd there
-3. Run following command
+3. Run following commands one by one
 
+replace {file address} with file path
 
-
-mongoimport --jsonArray --db test --collection SessionRecords --file fileAddressHEre.........
+mongoimport --jsonArray --db indianPremierLeague  --collection MatchData --file {file address}/matchdata.json
+mongoimport --jsonArray --db indianPremierLeague --collection SeasonsData --file {file address}/ipl.json
+mongoimport --jsonArray --db indianPremierLeague --collection IplUsers --file {file address}/ipluser.json
