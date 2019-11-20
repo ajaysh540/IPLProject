@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Main.css";
-import ReactDOM from "react-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import LeftMenu from "../LeftMenu/LeftMenu";
@@ -16,7 +15,9 @@ class Main extends Component {
       matches: [],
       loading: true,
       seasonDisplay: "",
-      allMatches: []
+      allMatches: [],
+      showDetails: false,
+      match: []
     };
     if (!sessionStorage.getItem("loggedIn")) {
       return <Redirect to="/" />;
@@ -50,29 +51,30 @@ class Main extends Component {
           })
           this.setState({ allMatches: this.state.matches })
           return 0;
-        },err=>{
-          alert("Some Error Occured Please Try After Some Time! \n"+err)
+        }, err => {
+          alert("Some Error Occured Please Try After Some Time! \n" + err)
         })
       }
     )
   }
   handleChange = (e) => {
     const id = e;
-    const match = this.state.matches.find(element => element._id === id);
-    document.getElementById("table").style.display = "none";
-    ReactDOM.render(
-      <Match match={match} close={this.removeMatch} />,
-      document.getElementById("main")
-    );
+    this.setState({ match: this.state.matches.find(element => element._id === id) });
+    // document.getElementById("table").style.display = "none";
+    // ReactDOM.render(
+    //   <Match match={match} close={this.removeMatch} />,
+    //   document.getElementById("main")
+    // );
+    this.setState({ showDetails: true })
   };
 
   removeMatch = () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById("main"));
-    document.getElementById("table").style.display = "block";
+    this.setState({ showDetails: false })
   };
 
   onSearch = team => {
-    if (team !== "") {
+    var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (team !== "" && !format.test(team)) {
       let match = [];
       match = (this.state.allMatches.filter(m =>
         (m.team1.toUpperCase().search(team.toUpperCase()) !== -1 || m.team2.toUpperCase().search(team.toUpperCase()) !== -1)
@@ -126,32 +128,37 @@ class Main extends Component {
             seasons={this.state.seasons}
             default={this.state.seasons[this.state.seasons.length - 1]}
             change={this.getMatch}
-          ></LeftMenu>
-          <div className="col-12 col-sm-8">
-            <div id="main" className="container text-center"></div>
-            <div id="table">
-              <div className="navbar bg-dark justify-content-between text-white mt-2 sticky-top rounded">
-                <label className="h3">{this.state.seasonDisplay}</label>
-                <label className="h5">
-                  <Search onSearch={this.onSearch} match={this.setMatch} />
-                </label>
-              </div>
-              <ReactTable
-                columns={columns}
-                defaultPageSize={20}
-                data={this.state.matches}
-                getTdProps={(state, rowInfo, column, instance) => {
-                  return {
-                    onClick: (e) => {
-                      this.handleChange(rowInfo.row._id)
+          >
+          </LeftMenu>
+          {!this.state.showDetails ?
+
+            (<div className="col-12 col-sm-8">
+              <div id="main" className="container text-center"></div>
+              <div id="table">
+                <div className="navbar bg-dark justify-content-between text-white mt-2 sticky-top rounded">
+                  <label className="h3">{this.state.seasonDisplay}</label>
+                  <label className="h5">
+                    <Search onSearch={this.onSearch} match={this.setMatch} />
+                  </label>
+                </div>
+                <ReactTable
+                  columns={columns}
+                  defaultPageSize={20}
+                  data={this.state.matches}
+                  getTdProps={(state, rowInfo, column, instance) => {
+                    return {
+                      onClick: (e) => {
+                        this.handleChange(rowInfo.row._id)
+                      }
                     }
-                  }
-                }}
-              ></ReactTable>
-            </div>
-          </div>
-        </div>
-      );
+                  }}
+                ></ReactTable>
+              </div>
+            </div>)
+            :
+            (< div className="container"><Match match={this.state.match} close={this.removeMatch} /></div>)
+          }
+        </div>);
     else return <div className="text-center text-dark h3">Loading.......</div>;
   }
 }
